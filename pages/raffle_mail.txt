@@ -1,0 +1,8 @@
+Hola #user#!
+Ha tingut la sort de ser l'amic invisible de #raffle#.
+A continuació se li mostrarà la carta que ha redactat per a orientar-lo:
+#letter-text#
+Recordi que pot revisar aquesta informació desde el seu panell de control a la web.
+    http://www.ztools.tk
+Esperem que tingui la mateixa sort, i que li faci molta ilusió el seu regal.
+La mà inocent li desitja Bones Festes!

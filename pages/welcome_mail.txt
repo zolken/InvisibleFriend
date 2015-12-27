@@ -1,0 +1,13 @@
+¡Hola #user#!
+
+¡Ja estàs només a un pas d'acabar!
+
+Aquest any, serà l'últim que hauràs de realitzar aquest procediment, ja que,
+el ximpancé que ha programat aquesta aplicació a pensat en una manera d'automatitzar-ho al llarg dels anys.
+
+Recorda que t'estàs registrant dins l'univers #universe#. Si això no fos correcte, contacta amb el ximpancé per a que ho arregli.
+
+Per a finalitzar el procediment de registre, ves al seguent enllaç: #link#
+Si per al contrari, t'has equivocat i vols donar-te de baixa, ves aquí: #unsub#
+
+Gràcies per la teva atenció!
