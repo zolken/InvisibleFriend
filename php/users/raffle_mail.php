@@ -15,7 +15,8 @@ function send_raffle_mail($email,$name1,$name2,$id2,$list_text){
     $plain = str_replace('#letter-text#',$list_text,$plain);
     $html = str_replace('#user#',$name1,$html);
     $html = str_replace('#raffle#',$name2,$html);
-    $image_link = 'www.ztools.tk/php/letter_visualizer.php?hash='.base64_encode($id2);
+    $year = date('Y', strtotime("+3 months", strtotime(date('Y-m-d'))));
+    $image_link = 'www.ztools.tk/php/letter_visualizer.php?hash='.base64_encode($id2.'&'.$year);
     $html = str_replace('#letter_image#',$image_link,$html);
     $rew = 5;
     

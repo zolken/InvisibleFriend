@@ -5,12 +5,15 @@ ini_set('display_errors', 1);
     if(!isset($_GET['hash'])) exit;
     
     $id = base64_decode($_GET['hash']);
+    $tmp = explode('&',$id);
+    if(sizeof($tmp)==1) {$id = $tmp[0]; $year='2016';}
+    else {$id = $tmp[0]; $year = $tmp[1];}
     
     include 'mysql_connection.php';
     
     $conn = get_connection();
     
-    $r = $conn->query('select image from zolken_invisiblefriend.lists where user='.$id.';');
+    $r = $conn->query('select image from zolken_invisiblefriend.lists where user='.$id.' and year='.$year.';');
     if($r){
         $item = $r->fetch_array(MYSQLI_ASSOC);
         header('Content-Type: image/png');

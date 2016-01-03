@@ -344,6 +344,33 @@
 		margin: 1% 10px 1% 10px;
 		padding: 0;
 	}
+    
+    #hist-letters-title{
+      display: block;
+    }
+    
+    #hist-letters{
+      width: 90%;
+      list-style-type: none;
+      padding: 0;
+      border: solid 1px rgb(220,220,220);
+      margin: 0 5% 10px 5%;
+      border-radius: 5px;
+    }
+    #hist-letters li{
+      width: 100%;
+      text-align: center;
+      background-color: #9DC9EA;
+      padding: 5px 0px;
+    }
+    #hist-raffles-title{
+      display: block;
+    }
+    #hist-raffles li a{
+      text-decoration: none;
+      color: #00BAAA;
+    }
+    
 }
 
 @media screen and (max-width: 999px), screen 
@@ -737,4 +764,18 @@
 	hr{
 		display: none;
 	}
+    
+    #hist-letters-title{
+      display: none;
+    }
+    
+    #hist-letters{
+      display: none;
+    }
+    #hist-letters li{
+      display: none;
+    }
+    #hist-raffles-title{
+      display: none;
+    }
 }

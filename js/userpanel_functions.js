@@ -28,7 +28,10 @@ function load_data(){
 	  $(".wmessage")[0].innerHTML = $(".wmessage")[0].innerHTML.replace(/#user#/,data.name.replace(/[ ].*$/,""));
 	  begin_firsttime();
 	}
-	else $("#first-time-div").fadeOut(500,function(){$(this).remove();});
+	else {
+	  $("#first-time-div").fadeOut(500,function(){$(this).remove();});
+	  window.scrollTo(0,0);
+	}
   }
 }
 

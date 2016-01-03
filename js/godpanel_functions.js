@@ -45,28 +45,72 @@ function load_universes() {
             source: adapter,
             columns: columns
     });
+    $("#universe-table").on('rowclick',function(event){
+          load_stars(event.args.row.bounddata.id);  
+    })
+
+}
+
+function load_stars(universe) {
+    
+    var source = {
+        datatype: "json",
+        datafields: [
+            {name:"id"},
+            {name:"name"},
+            {name:"email"},
+            {name:"hash"},
+            {name:"admin"},
+            {name:"first_time"},
+            {name:"status"},
+            {name:"ready"},
+            {name:"universe"},
+            {name:"year"},
+            {name:"delete", map:"id"}
+        ],
+        id : 'id',
+        url: "../php/universes/get_stars_from_univers.php?universe="+universe,
+        root: 'data'
+    };
+    
+    var adapter = new $.jqx.dataAdapter(source);
+
+    $("#stars-table").jqxGrid({
+            source: adapter,
+    });
 
 }
 
 function init_stars() {
-    /*var columns = [
+    
+    var buttonrenderer = function(row, column, value, htmlElement){
+        var img = $('<img id="'+value+'" src="../src/delete_icon.png" title="Delete universe" alt="Delete universe button"/>');
+        $(htmlElement).append(img);
+        img[0].onclick = delete_user;
+    }
+
+    var initwidget = function(row, column, value, htmlElement){
+        var img = $(htmlElement).find("img")[0];
+        img.id = value;
+    }
+    
+    var columns = [
       {text: 'Id', datafield: 'id', width:'5%', cellsalign: 'center', align: 'center'},
       {text: 'Name', datafield: 'name', width:'20%', cellsalign: 'center', align: 'center'},
       {text: 'Email', datafield: 'email', width:'35%', cellsalign: 'left', align: 'left'},
-      {text: 'Admin', datafield: 'admin', width:'5%', cellsalign: 'center', align: 'center'},
-      {text: 'New', datafield: 'first_time', width:'5%', cellsalign: 'center', align: 'center'},
-      {text: 'Status', datafield: 'status', width:'5%', cellsalign: 'center', align: 'center'},
-      {text: 'Ready', datafield: 'ready', width:'5%', cellsalign: 'center', align: 'center'},
-      {text: 'Universe', datafield: 'universe', width:'5%', cellsalign: 'center', align: 'center'},
+      {text: 'Admin', datafield: 'admin', width:'6%', cellsalign: 'center', align: 'center'},
+      {text: 'New', datafield: 'first_time', width:'6%', cellsalign: 'center', align: 'center'},
+      {text: 'Status', datafield: 'status', width:'6%', cellsalign: 'center', align: 'center'},
+      {text: 'Ready', datafield: 'ready', width:'7%', cellsalign: 'center', align: 'center'},
       {text: 'Year', datafield: 'year', width:'8%', cellsalign: 'center', align: 'center'},
       {text: '', datafield: 'delete', width:'7%', cellsalign: 'center', align: 'center', createwidget: buttonrenderer, initwidget: initwidget}
     ];
     $("#stars-table").jqxGrid({
             width: "90%",
             height: "250px",
-            //source: adapter,
             columns: columns
-    });*/
+    });
+    load_stars();
 }
 
 function create_universe() {
@@ -127,6 +171,36 @@ function delete_universe() {
                 document.getElementsByClassName("frontground")[0].style.display="none";
             } else if (this.readyState == 4) document.getElementsByClassName("frontground")[0].style.display="none";
         }
+        conn.send("id="+id);
+    }
+    
+    document.getElementById("cancel").onclick = function(){ 
+        document.getElementsByClassName("dialog")[0].style.display="none";
+        document.getElementsByClassName("frontground")[0].style.display="none";
+    }
+}
+
+function delete_user() {
+    var id =this.id;
+    if (id < 2 || id == undefined) return;
+    var rdata = $("#stars-table").jqxGrid('getrowdatabyid', id);
+
+    document.getElementById("dialog_message").innerHTML="The user <b>"+rdata.name+"</b> must be deleted, are you sure?";
+    document.getElementById("ok").value="Bye bye!";
+    document.getElementById("cancel").value="I love it!";
+    document.getElementsByClassName("frontground")[0].style.display="block";
+    document.getElementsByClassName("dialog")[0].style.display="block";
+    document.getElementById("ok").onclick = function(){
+        document.getElementsByClassName("dialog")[0].style.display="none";
+        var conn = new XMLHttpRequest();
+        /*conn.open("POST","../php/users/delete_user.php");
+        conn.setRequestHeader("Content-type","application/x-www-form-urlencoded; charset=utf-8");
+        conn.onreadystatechange = function(){
+            if (this.readyState==4 && this.status==200 && parseInt(this.responseText) == 200) {
+                $("#universe-table").jqxGrid('deleterow', id);
+                document.getElementsByClassName("frontground")[0].style.display="none";
+            } else if (this.readyState == 4) document.getElementsByClassName("frontground")[0].style.display="none";
+        }*/
     }
     
     document.getElementById("cancel").onclick = function(){ 

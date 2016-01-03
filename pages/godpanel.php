@@ -56,6 +56,7 @@
 		<input type="submit" value="Create!" name="create" id="create_universe_btn"/>
 		<h2>Stars</h2>
 		<div id="stars-table"></div>
+		<br>
 	</div>
    
 </body>

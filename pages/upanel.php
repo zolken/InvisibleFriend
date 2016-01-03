@@ -108,6 +108,39 @@
 			<hr>
 			<h1 id="ready-title">¿Estàs llest?</h1>
 			<input id="ready" type="submit" value="Sí, estic llest!" class="notready" alt="Ready button" title="¿Estàs llest?">
+			<hr>
+			<h1 id="hist-letters-title">Històric de cartes</h1>
+			<ul id="hist-letters">
+			<?php
+				  $conn = get_connection();
+				  $r = $conn->query('select l.year
+									from zolken_invisiblefriend.lists l
+									where l.user='.$_COOKIE['loggin'].';');
+				  if($r){
+					while($row = $r->fetch_array(MYSQLI_ASSOC)){
+					  echo '<li>'.$row['year'].'</li>';
+					}
+				  }
+				  $conn->close();
+			  ?>
+			</ul>
+			<hr>
+			<h1 id="hist-raffles-title">Històric de sortejos</h1>
+			<ul id="hist-raffles">
+			<?php
+				  $conn = get_connection();
+				  $r = $conn->query('select r.year,u.name, u.id
+									from zolken_invisiblefriend.raffles r
+									inner join zolken_invisiblefriend.users u on u.id = r.user_2
+									where r.user_1='.$_COOKIE['loggin'].';');
+				  if($r){
+					while($row = $r->fetch_array(MYSQLI_ASSOC)){
+					  echo '<li>'.$row['year'].': <a target="_blank" href="http://www.ztools.tk/php/letter_visualizer.php?hash='.base64_encode($row['id'].'&'.$row['year']).'">'.base64_decode($row['name']).'</a></li>';
+					}
+				  }
+				  $conn->close();
+			  ?>
+			</ul>
         </div>
 	</div>
    
